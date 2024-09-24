@@ -58,9 +58,3 @@
 		  -i ITERATIONS, --iterations ITERATIONS
 		                        Number of passes
 		```
-
-	2. Run tests (you can customize them in `tester.py`):
-
-		```
-		pytest -rA tester.py
-		```
