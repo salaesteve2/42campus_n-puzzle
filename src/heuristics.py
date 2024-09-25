@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+import math
 
 def greedy_search(args, g_cost, lista_actual):
     if not args.greedy_search:
@@ -16,6 +17,8 @@ def next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g):
         h_cost = hamming(sucesores, matrix_snale)
     elif mode == "Costo Uniforme":
         h_cost = 0
+    elif mode == "Euclides":
+        h_cost = distance_euclidean(size, sucesores, matrix_snale)
     elif mode == "Nilsson":
         posibilidad_g = nilsson(sucesores, spiral_sequence, size) * 3
         h_cost = distance_manhattan(size, sucesores, matrix_snale)
@@ -33,6 +36,9 @@ def heuristic(mode, matriz, matrix_snale, size):
     elif mode == "Costo Uniforme":
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Costo Uniforme' + Style.RESET_ALL)
         h_cost = 0
+    elif mode == "Euclides":
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Euclides' + Style.RESET_ALL)
+        h_cost = distance_euclidean(size, matriz, matrix_snale)
     elif mode == "Nilsson":
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Nilsson' + Style.RESET_ALL)
         h_cost = distance_manhattan(size, matriz, matrix_snale)
@@ -46,6 +52,16 @@ def distance_manhattan(size1, matrix1, solved):
                 target_x = (value - 1) // size1  # Calcula solo una vez el índice de fila objetivo
                 target_y = (value - 1) % size1   # Calcula solo una vez el índice de columna objetivo
                 res += abs(i - target_x) + abs(j - target_y)
+    return res
+
+def distance_euclidean(size1, matrix1, solved):
+    res = 0
+    for i, row in enumerate(matrix1):
+        for j, value in enumerate(row):
+            if value != 0 and value != solved[i][j]:
+                target_x = (value - 1) // size1  # Índice de fila objetivo
+                target_y = (value - 1) % size1   # Índice de columna objetivo
+                res += math.sqrt((i - target_x)**2 + (j - target_y)**2)  # Distancia euclidiana
     return res
 
 def hamming(state, goal_state):

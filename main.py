@@ -26,7 +26,8 @@ def main():
         "Manhattan": "Manhattan",
         "Hamming": "Hamming",
         "Costo Uniforme": "Costo Uniforme",
-        "Nilsson": "Nilsson"
+        "Nilsson": "Nilsson",
+        "Euclides": "Euclides"
     }
 
     mode = args.mode
