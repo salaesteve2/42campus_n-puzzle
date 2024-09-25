@@ -18,7 +18,7 @@
 2. Run n-puzzle solver:
 
 	```
-	python main.py file heuristic_function [-g] [-v]
+	python main.py file heuristic_function [-g] [-v] [-c] [-n]
 
 	positional arguments:
 	  heuristic_function  specifies heuristic function
