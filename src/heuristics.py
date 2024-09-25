@@ -1,3 +1,43 @@
+from colorama import Fore, Style
+
+def greedy_search(args, g_cost, lista_actual):
+    if not args.greedy_search:
+        posibilidad_g = g_cost[lista_actual] + 1
+    else:
+        posibilidad_g = 0
+    return posibilidad_g
+
+def next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g):
+    h_cost = 0
+    spiral_sequence = generate_spiral_sequence(size)
+    if mode == "Manhattan":
+        h_cost = distance_manhattan(size, sucesores, matrix_snale)
+    elif mode == "Hamming":
+        h_cost = hamming(sucesores, matrix_snale)
+    elif mode == "Costo Uniforme":
+        h_cost = 0
+    elif mode == "Nilsson":
+        posibilidad_g = nilsson(sucesores, spiral_sequence, size) * 3
+        h_cost = distance_manhattan(size, sucesores, matrix_snale)
+
+    return h_cost, posibilidad_g
+
+def heuristic(mode, matriz, matrix_snale, size):
+    h_cost = 0
+    if mode == "Manhattan":
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Manhattan' + Style.RESET_ALL)
+        h_cost = distance_manhattan(size, matriz, matrix_snale)
+    elif mode == "Hamming":
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Hamming' + Style.RESET_ALL)
+        h_cost = hamming(matriz, matrix_snale)
+    elif mode == "Costo Uniforme":
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Costo Uniforme' + Style.RESET_ALL)
+        h_cost = 0
+    elif mode == "Nilsson":
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Nilsson' + Style.RESET_ALL)
+        h_cost = distance_manhattan(size, matriz, matrix_snale)
+    return h_cost
+
 def distance_manhattan(size1, matrix1, solved):
     res = 0
     for i, row in enumerate(matrix1):
@@ -14,7 +54,6 @@ def hamming(state, goal_state):
         if state[i] != goal_state[i] and state[i] != 0:  # Ignora el espacio vacío
             count += 1
     return count
-
 
 def generate_spiral_sequence(N):
 
