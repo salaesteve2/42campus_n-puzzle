@@ -13,7 +13,7 @@
 1. Install required packages:
 
 	```
-	pip install --no-cache-dir -r requirements.txt
+	pip install --no-cache-dir -r requeriments.txt
 	```
 2. Run n-puzzle solver:
 
