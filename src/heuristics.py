@@ -8,38 +8,37 @@ def greedy_search(args, g_cost, lista_actual):
         posibilidad_g = 0
     return posibilidad_g
 
-def next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g):
+def next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g, args):
     h_cost = 0
     spiral_sequence = generate_spiral_sequence(size)
-    if mode == "Manhattan":
+    if args.uniform_cost:
+        h_cost = 0
+    elif mode == "Manhattan":
         h_cost = distance_manhattan(size, sucesores, matrix_snale)
     elif mode == "Hamming":
         h_cost = hamming(sucesores, matrix_snale)
-    elif mode == "Costo Uniforme":
-        h_cost = 0
     elif mode == "Euclides":
         h_cost = distance_euclidean(size, sucesores, matrix_snale)
-    elif mode == "Nilsson":
+    elif mode == "Nilsson" and args.non_admisible:
         posibilidad_g = nilsson(sucesores, spiral_sequence, size) * 3
         h_cost = distance_manhattan(size, sucesores, matrix_snale)
 
     return h_cost, posibilidad_g
 
-def heuristic(mode, matriz, matrix_snale, size):
+def heuristic(mode, matriz, matrix_snale, size, args):
     h_cost = 0
-    if mode == "Manhattan":
+    if args.uniform_cost:
+        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Costo Uniforme' + Style.RESET_ALL)
+    elif mode == "Manhattan":
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Manhattan' + Style.RESET_ALL)
         h_cost = distance_manhattan(size, matriz, matrix_snale)
     elif mode == "Hamming":
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Hamming' + Style.RESET_ALL)
         h_cost = hamming(matriz, matrix_snale)
-    elif mode == "Costo Uniforme":
-        print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Costo Uniforme' + Style.RESET_ALL)
-        h_cost = 0
     elif mode == "Euclides":
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Euclides' + Style.RESET_ALL)
         h_cost = distance_euclidean(size, matriz, matrix_snale)
-    elif mode == "Nilsson":
+    elif mode == "Nilsson" and args.non_admisible:
         print('Heuristic: ' + Fore.LIGHTMAGENTA_EX + 'Nilsson' + Style.RESET_ALL)
         h_cost = distance_manhattan(size, matriz, matrix_snale)
     return h_cost

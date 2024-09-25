@@ -27,6 +27,9 @@
 	optional arguments:
 	  -g                  enable only greedy search
 	  -v                  use visualizer
+ 	  -c                  enable only uniform cost
+      -n                  use a non-admisible heuristic
+ 
 	```
 
 ## Heuristics

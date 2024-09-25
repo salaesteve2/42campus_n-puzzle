@@ -21,7 +21,7 @@ def a_algorithm(mode, args, matriz, matrix_snale, size, start_time):
         print('Greedy Search:' + Fore.GREEN + ' True' + Style.RESET_ALL)
 
     # Gestionar heuristica
-    h_cost = heuristics.heuristic(mode, matriz, matrix_snale, size)
+    h_cost = heuristics.heuristic(mode, matriz, matrix_snale, size, args)
     f_cost = h_cost
 
     heapq.heappush(maps_list, (f_cost, matriz))
@@ -55,7 +55,7 @@ def a_algorithm(mode, args, matriz, matrix_snale, size, start_time):
                 g_cost[lista_sucesores] = posibilidad_g
 
                 # Aplicar heuristica correspondiente
-                h_cost, posibilidad_g = heuristics.next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g)
+                h_cost, posibilidad_g = heuristics.next_heuristic(mode, size, sucesores, matrix_snale, posibilidad_g, args)
 
                 # Greedy search
                 if args.greedy_search:

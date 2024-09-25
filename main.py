@@ -12,9 +12,11 @@ def main():
     # Gestion argumentos
     parser = argparse.ArgumentParser()
     parser.add_argument("map", help="Map puzzle's side.")
-    parser.add_argument("mode", help="Heuristic function(Manhattan, Hamming, Costo Uniforme, Nilsson).")
+    parser.add_argument("mode", help="Heuristic function(Manhattan, Hamming, Euclides, Nilsson).")
     parser.add_argument("-g", "--greedy_search", action="store_true", default=False, help="Greedy Search function.")
     parser.add_argument("-v", "--visualizer", action="store_true", default=False ,help="Visualizer.")
+    parser.add_argument("-c", "--uniform_cost", action="store_true", default=False, help="Uniform Cost.")
+    parser.add_argument("-n", "--non_admisible", action="store_true", default=False, help="Nilsson Non-Admisible Cost.")
     args = parser.parse_args()
 
     # Parsear los argumentos
@@ -25,13 +27,12 @@ def main():
     modes = {
         "Manhattan": "Manhattan",
         "Hamming": "Hamming",
-        "Costo Uniforme": "Costo Uniforme",
         "Nilsson": "Nilsson",
         "Euclides": "Euclides"
     }
 
     mode = args.mode
-    if mode not in modes:
+    if mode not in modes or mode == "Nilsson" and not args.non_admisible:
         print(Fore.RED + "Error. The mode dont exist." + Style.RESET_ALL)
         sys.exit()
 
