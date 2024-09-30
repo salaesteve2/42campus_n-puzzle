@@ -4,7 +4,7 @@ VENV := venv
 # default target, when make executed without arguments
 all: venv
 
-$(VENV)/bin/activate: requirements.txt
+$(VENV)/bin/activate:
 	 python3 -m venv $(VENV)
 	 ./$(VENV)/bin/pip install colorama
 	 ./$(VENV)/bin/pip install pygame
