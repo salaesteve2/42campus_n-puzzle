@@ -14,13 +14,17 @@ $(VENV)/bin/activate:
 venv: $(VENV)/bin/activate
 
 run: venv
-	@read -p "Introduce el archivo: " filename; \
-	 read -p "Introduce el método: " method; \
-	 read -p "Introduce modos: " mode; \
-	 if [ -z "$$mode" ]; then \
-             ./$(VENV)/bin/python3 main.py $$filename $$method; \
+        @read -p "Introduce el archivo: " filename; \
+         read -p "Introduce el método: " method; \
+         read -p "Introduce modos: " mode; \
+         if [ -z "$$filename" ] || [ -z "$$method" ]; then \
+             echo "Parámetros vacíos"; \
          else \
-             ./$(VENV)/bin/python3 main.py $$filename $$method $$mode; \
+             if [ -z "$$mode" ]; then \
+                 ./$(VENV)/bin/python3 main.py $$filename $$method; \
+             else \
+                 ./$(VENV)/bin/python3 main.py $$filename $$method $$mode; \
+             fi; \
          fi
 
 clean:
