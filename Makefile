@@ -17,7 +17,11 @@ run: venv
 	@read -p "Introduce el archivo: " filename; \
 	 read -p "Introduce el método: " method; \
 	 read -p "Introduce modos: " mode; \
-	 ./$(VENV)/bin/python3 main.py $$filename $$method $$mode
+	 if [ -z "$$mode" ]; then \
+             ./$(VENV)/bin/python3 main.py $$filename $$method; \
+         else \
+             ./$(VENV)/bin/python3 main.py $$filename $$method $$mode; \
+         fi
 
 clean:
 	rm -rf $(VENV)
