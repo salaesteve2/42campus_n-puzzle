@@ -78,27 +78,27 @@ VENV := venv
 # default target, when make executed without arguments
 all: venv
 
-$(VENV)/bin/activate:
+$(VENV)/bin/activate: python3_check
         python3 -m venv $(VENV)
         ./$(VENV)/bin/pip install colorama
         ./$(VENV)/bin/pip install pygame
         ./$(VENV)/bin/pip install termcolor
 
-python3_check:
-        python3 -V 2>/dev/null || (echo "python installin" && install_python3)
-
 install_python3:
         curl -L0 https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe
+
+python3_check:
+        python3 -V 2>/dev/null || (echo "python installin" && curl -L0 https://www.python.org/ftp/python/3.11.5/python>
 
 # venv is a shortcut target
 venv: $(VENV)/bin/activate python3_check
 
 run: venv
         @read -p "Introduce el archivo: " filename; \
-        read -p "Introduce el método: " method; \
+        read -p "Introduce el m  todo: " method; \
         read -p "Introduce modos: " mode; \
         if [ -z "$$filename" ] || [ -z "$$method" ]; then \
-                echo "Parámetros vacíos"; \
+                echo "Par  metros vac  os"; \
         else \
                 if [ -z "$$mode" ]; then \
                         ./$(VENV)/bin/python3 main.py $$filename $$method; \
@@ -112,3 +112,4 @@ clean:
         find . -type f -name '*.pyc' -delete
 
 .PHONY: all venv run clean
+
