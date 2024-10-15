@@ -64,7 +64,7 @@
 
 
 
-SALUS PRUEBA ESTE MAKE:
+SALUS PRUEBA ESTE MAKE (pero dale a edit para copiarlo que se ve raro aqui):
 
 
 # define the name of the virtual environment directory
