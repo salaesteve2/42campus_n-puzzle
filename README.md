@@ -61,3 +61,49 @@
 		  -i ITERATIONS, --iterations ITERATIONS
 		                        Number of passes
 		```
+
+
+
+SALUS PRUEBA ESTE MAKE:
+
+
+# define the name of the virtual environment directory
+VENV := venv
+
+# default target, when make executed without arguments
+all: venv
+
+$(VENV)/bin/activate:
+        python3 -m venv $(VENV)
+        ./$(VENV)/bin/pip install colorama
+        ./$(VENV)/bin/pip install pygame
+        ./$(VENV)/bin/pip install termcolor
+
+python3_check:
+        python3 -V 2>/dev/null || (echo "python installin" && install_python3)
+
+install_python3:
+        curl -L0 https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe
+
+# venv is a shortcut target
+venv: $(VENV)/bin/activate python3_check
+
+run: venv
+        @read -p "Introduce el archivo: " filename; \
+        read -p "Introduce el método: " method; \
+        read -p "Introduce modos: " mode; \
+        if [ -z "$$filename" ] || [ -z "$$method" ]; then \
+                echo "Parámetros vacíos"; \
+        else \
+                if [ -z "$$mode" ]; then \
+                        ./$(VENV)/bin/python3 main.py $$filename $$method; \
+                else \
+                        ./$(VENV)/bin/python3 main.py $$filename $$method $$mode; \
+                fi; \
+        fi
+
+clean:
+        rm -rf $(VENV)
+        find . -type f -name '*.pyc' -delete
+
+.PHONY: all venv run clean
