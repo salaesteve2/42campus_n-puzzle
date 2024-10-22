@@ -22,9 +22,9 @@ run: venv
 		echo "Parámetros vacíos"; \
 	else \
 		if [ -z "$$mode" ]; then \
-			./$(VENV)/bin/python3 main.py $$filename $$method; \
+			./$(VENV)/bin/python3 main.py $$filename $$method || true; \
 		else \
-			./$(VENV)/bin/python3 main.py $$filename $$method $$mode; \
+			./$(VENV)/bin/python3 main.py $$filename $$method $$mode || true; \
 		fi; \
 	fi
 
