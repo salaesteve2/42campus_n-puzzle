@@ -3,7 +3,7 @@ from colorama import Fore, Style
 import time
 import sys
 
-def solution(open_set, visited, start_time, recorrido, lista_actual, size, args):
+def solution(open_set, visited, start_time, route, actual_list, size, args):
     print(Fore.GREEN + "Solution found" + Style.RESET_ALL)
     print('Total number of states selected (time complexity): ' + Fore.GREEN + str(
         len(open_set)) + Style.RESET_ALL)  # cantidad de nodos a lo largo de la ejecucion
@@ -12,10 +12,10 @@ def solution(open_set, visited, start_time, recorrido, lista_actual, size, args)
     end_time = time.time()
     execution_time = end_time - start_time
     print('Execution time: ' + Fore.GREEN + f"{execution_time:.5f}" + ' seconds' + Style.RESET_ALL)
-    camino = path.camino_recorrido(recorrido, lista_actual)
+    path1 = path.path(route, actual_list)
 
     # Llamar al visualizador
     if args.visualizer:
-        visualizer.visualizador_solucion(camino, size)
+        visualizer.visualizer_solution(path1, size)
 
     sys.exit(0)

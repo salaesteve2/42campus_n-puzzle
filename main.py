@@ -37,11 +37,11 @@ def main():
         sys.exit()
 
     # Abrir archivo
-    lines = maps.leer_mapa(args.map)
+    lines = maps.read_map(args.map)
 
     # Parsear mapa
-    matriz, size = maps.procesar_mapa(lines)
-    matrix = [number for sublist in matriz for number in sublist]
+    matrix1, size = maps.process_map(lines)
+    matrix = [number for sublist in matrix1 for number in sublist]
     rango = all(0 <= num <= size * size - 1 for num in matrix)
 
     # gestion de posibles errores
@@ -50,14 +50,14 @@ def main():
         sys.exit(1)
 
     #Matriz del mapa ordenado
-    matrix_snale = maps.generar_matriz_caracol(size)
+    matrix_snale = maps.generate_snail(size)
     print("Desired matrix: ")
     for lines in matrix_snale:
         print(Fore.YELLOW + str(lines) + Style.RESET_ALL)
 
     #Matriz del mapa a ordenar
     print("Initial matrix: ")
-    for lines in matriz:
+    for lines in matrix1:
         print(Fore.CYAN + str(lines) + Style.RESET_ALL)
 
     # Calcular si es resoluble
@@ -69,7 +69,7 @@ def main():
         print('Visualizer:' + Fore.RED + ' False' + Style.RESET_ALL)
 
     # Aplicar algoritmo solucion
-    a_algorithm.a_algorithm(mode, args, matriz, matrix_snale, size, start_time)
+    a_algorithm.a_algorithm(mode, args, matrix1, matrix_snale, size, start_time)
 
 if __name__ == "__main__":
     main()

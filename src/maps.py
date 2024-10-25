@@ -1,7 +1,7 @@
 import sys
 from colorama import Fore, Style, init
 
-def generar_matriz_caracol(n):
+def generate_snail(n):
     # Crear una matriz vacía de tamaño n x n
     matriz = [[0] * n for _ in range(n)]
 
@@ -46,7 +46,7 @@ def generar_matriz_caracol(n):
 
     return matriz
 
-def leer_mapa(map_matrix):
+def read_map(map_matrix):
     lines = []
     with open(map_matrix, 'r') as file:
         for line in file:
@@ -57,7 +57,7 @@ def leer_mapa(map_matrix):
                 lines.append(line.strip())
     return lines
 
-def procesar_mapa(lines):
+def process_map(lines):
     # rellenar en una lista
     matriz = []
     size1 = 0
